@@ -35,7 +35,12 @@ public class SedeService{
         System.out.println(sede.getNombre());
         System.out.println(sede.getEmpresa());
     return  "Se ha creado una sede correctamente.";
-
     }
+
+    public String delete(Integer codigoSede){
+        System.out.println(codigoSede);
+        return "Se ha eliminado una sede correctamente";
+    }
+
 
 }

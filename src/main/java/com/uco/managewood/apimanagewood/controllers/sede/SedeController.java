@@ -19,19 +19,16 @@ public class SedeController {
         return sedeService.get(codigoSede);
     }
 
-
-
     @PostMapping("/sedes")
     public String create(@RequestBody Sede sede){
-
         return sedeService.create(sede);
     }
 
 
+    @DeleteMapping("/sedes")
+    public String delete(@RequestParam(required = true) Integer codigoSede){
+        return sedeService.delete(codigoSede);
 
-    @DeleteMapping("/sedes/{codigoSede}")
-    public String delete(@PathVariable int codigoSede){
-        return "Se eliminó la sede exitosamente";
     }
 
 
