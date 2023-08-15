@@ -32,6 +32,14 @@ public class Colaborador {
         return estadoColaborador;
     }
 
+    public int getCodigoSede() {
+        return codigoSede;
+    }
+
+    public void setCodigoSede(int codigoSede) {
+        this.codigoSede = codigoSede;
+    }
+
     public void setEstadoColaborador(EstadoColaborador estadoColaborador) {
         this.estadoColaborador = estadoColaborador;
     }
