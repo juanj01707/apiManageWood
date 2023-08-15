@@ -1,7 +1,7 @@
 package com.uco.managewood.apimanagewood.domain.sede;
 
 public class Ciudad {
-    private int codigo;
+    private int codigo=4569;
     private String nombre;
     private Departamento departamento;
 

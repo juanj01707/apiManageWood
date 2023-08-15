@@ -2,8 +2,8 @@ package com.uco.managewood.apimanagewood.domain.sede;
 
 public class Sede {
 
-    private int codigo;
-    private String nombre;
+    private int codigo = 7887;
+    private String nombre= "CARPENTERS CARMEN INC";
     private Empresa empresa;
     private Ciudad ciudad;
 

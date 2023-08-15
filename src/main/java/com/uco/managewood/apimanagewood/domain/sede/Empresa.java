@@ -1,7 +1,7 @@
 package com.uco.managewood.apimanagewood.domain.sede;
 
 public class Empresa {
-    private int codigo;
+    private int codigo=1256;
     private String nombre;
     private int nit;
 
