@@ -6,33 +6,42 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table( name = "colaborador")
 @Getter
 @Setter
 
+
 public class Colaborador {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "codigocolabordor", nullable = false)
 
 
-    private int codigo;
-    @Column(name = "codigo")
+    private int codigocolabordor;
+    @Column(name = "codigocolabordor")
 
     private String nombre;
     @Column(name = "nombre")
-    private int identificacion;
-    @Column(name="identificacion")
+
+    private String identificacion;
+    @Column(name = "identificacion")
+
+
+
+    @OneToOne
+    private TipoIdentificacion tipoIdentificacion;
 
 
     @ManyToOne
-    @JoinColumn(name = "codigoTipoColaborador", insertable = false,updatable = false)
+    @JoinColumn(name = "codigotipocolaborador", insertable = false,updatable = false)
     private TipoColaborador tipoColaborador;
 
     @ManyToOne
-    @JoinColumn(name = "codigoEstadoColaborador", insertable = false,updatable = false)
+    @JoinColumn(name = "codigoestadocolaborador", insertable = false,updatable = false)
     private EstadoColaborador estadoColaborador;
 
     @ManyToOne
@@ -45,12 +54,21 @@ public class Colaborador {
 
     }
 
+    public Colaborador(int codigocolabordor, String nombre, TipoIdentificacion tipoIdentificacion, TipoColaborador tipoColaborador, EstadoColaborador estadoColaborador, int codigoSede) {
+        this.codigocolabordor = codigocolabordor;
+        this.nombre = nombre;
+        this.tipoIdentificacion = tipoIdentificacion;
+        this.tipoColaborador = tipoColaborador;
+        this.estadoColaborador = estadoColaborador;
+        this.codigoSede = codigoSede;
+    }
+
     public int getCodigo() {
-        return codigo;
+        return codigocolabordor;
     }
 
     public void setCodigo(int codigo) {
-        this.codigo = codigo;
+        this.codigocolabordor = codigo;
     }
 
     public TipoColaborador getTipoColaborador() {
@@ -93,11 +111,13 @@ public class Colaborador {
         this.nombre = nombre;
     }
 
-    public int getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(int identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
+
+
 }

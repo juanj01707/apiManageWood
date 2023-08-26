@@ -6,6 +6,8 @@ import com.uco.managewood.apimanagewood.service.colaborador.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("api/v1/rest")
 public class ColaboradorController {
@@ -13,6 +15,14 @@ public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
 
+
+    @GetMapping("/colaboradores/all")
+    public ArrayList<Colaborador> get(){
+        return colaboradorService.findAll();
+    }
+
+
+    /*
     @GetMapping("/colaboradores")
     public Colaborador get(@RequestParam(required = true) Integer codigo){
         return colaboradorService.get(codigo);
@@ -27,5 +37,7 @@ public class ColaboradorController {
     public String delete(@RequestParam(required = true) Integer codigo){
         return colaboradorService.delete(codigo);
     }
+    */
+
 
 }

@@ -10,12 +10,23 @@ import com.uco.managewood.apimanagewood.util.UtilStrings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 @Service
 public class ColaboradorService {
 
+    @Autowired
+    private IColaboradorRepository colaboradorRepository;
 
+    @Transactional
+    public ArrayList<Colaborador> findAll(){
+        return (ArrayList<Colaborador>) colaboradorRepository.findAll();
+    }
+
+/*
     public Colaborador get(Integer codigo) {
         Colaborador colaborador = new Colaborador();
         colaborador.setCodigo(777);
@@ -41,7 +52,7 @@ public class ColaboradorService {
         return "Se ha eliminado un colaborador correctamente";
     }
 
-
+*/
 
 
 
