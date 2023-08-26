@@ -1,45 +1,26 @@
 package com.uco.managewood.apimanagewood.domain.sede;
 
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
+@Table(name = "sede")
 public class Sede {
 
-    private int codigo = 7887;
-    private String nombre= "CARPENTERS CARMEN INC";
-    private Empresa empresa;
-    private Ciudad ciudad;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int codigosede;
+    private String nombre;
 
-    public Sede(){
+    @ManyToOne
+    @JoinColumn(name = "FK_empresa")
+    private Empresa codigoempresa;
 
-    }
+    @ManyToOne
+    @JoinColumn(name = "FK_ciudad")
+    private Ciudad codigociudad;
 
-    public int getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public Ciudad getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
-    }
 }

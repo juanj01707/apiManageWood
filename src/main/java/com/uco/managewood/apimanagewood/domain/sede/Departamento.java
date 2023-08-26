@@ -1,35 +1,22 @@
 package com.uco.managewood.apimanagewood.domain.sede;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Data
+@Entity
 public class Departamento {
-    private int codigo;
+
+    @Id
+    private int codigodepartamento;
     private String nombre;
-    private Pais pais;
 
-    public Departamento(){
+    @ManyToOne
+    @JoinColumn(name = "FK_pais")
+    private Pais codigopais;
 
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
 }

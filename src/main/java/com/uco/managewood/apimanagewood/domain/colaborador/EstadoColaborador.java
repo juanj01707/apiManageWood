@@ -1,27 +1,19 @@
 package com.uco.managewood.apimanagewood.domain.colaborador;
 
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Data
+@Entity
 public class EstadoColaborador {
 
-    private int codigo;
+    @Id
+    private int codigoestadocolaborador;
+
     private String nombre;
 
-    public EstadoColaborador(){
 
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 }
