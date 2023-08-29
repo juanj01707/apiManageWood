@@ -18,7 +18,7 @@ public class ColaboradorController {
     private ColaboradorService colaboradorService;
 
 
-    @GetMapping(value = "/{codigo}")
+    @GetMapping(value = "/colaborador/{codigo}")
     public ResponseEntity<Optional<Colaborador>> findColaboradorById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.findById(codigo));
     }

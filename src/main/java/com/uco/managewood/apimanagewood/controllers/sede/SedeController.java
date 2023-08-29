@@ -18,17 +18,17 @@ public class SedeController {
 
     private SedeService sedeService;
 
-    @GetMapping(value = "/{codigo}")
+    @GetMapping(value = "/sede/{codigo}")
     public ResponseEntity<Optional<Sede>> findSedeById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(sedeService.findById(codigo));
     }
 
-    @PostMapping
+    @PostMapping(value = "/sede")
     public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
         return ResponseEntity.status(HttpStatus.CREATED).body(sedeService.saveSede(sede));
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/sede/{codigo}")
     public void deleteSede(@PathVariable("codigo") Integer codigo){
         sedeService.deleteSede(codigo);
     }

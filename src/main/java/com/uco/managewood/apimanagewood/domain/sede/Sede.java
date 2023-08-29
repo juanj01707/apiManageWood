@@ -15,11 +15,11 @@ public class Sede {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "FK_empresa")
+    @JoinColumn(name = "codigoempresa")
     private Empresa codigoempresa;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ciudad")
+    @JoinColumn(name = "codigociudad")
     private Ciudad codigociudad;
 
 

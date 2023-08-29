@@ -16,7 +16,7 @@ public class Inventario {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "FK_sede")
+    @JoinColumn(name = "codigosede")
     private Sede codigosede;
 
 

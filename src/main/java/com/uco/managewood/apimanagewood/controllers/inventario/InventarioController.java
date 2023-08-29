@@ -12,22 +12,22 @@
 
     @RestController
     @RequestMapping("api/v1/rest")
-    public class InventarioColaborador {
+    public class InventarioController {
         @Autowired
         private InventarioService inventarioService;
 
 
-        @GetMapping(value = "/find/{codigo}")
+        @GetMapping(value = "/inventario/{codigo}")
         public ResponseEntity<Optional<Inventario>> findInventarioById(@PathVariable("codigo") Integer codigo){
             return ResponseEntity.status(HttpStatus.OK).body(inventarioService.findById(codigo));
         }
 
-        @PostMapping
+        @PostMapping(value = "/inventario")
         public ResponseEntity<Inventario> saveInventario(@RequestBody Inventario inventario){
             return ResponseEntity.status(HttpStatus.CREATED).body(inventarioService.saveInventario(inventario));
         }
 
-        @DeleteMapping(value = "/{codigo}")
+        @DeleteMapping(value = "/inventario/{codigo}")
         public void deleteInventario(@PathVariable("codigo") Integer codigo){
             inventarioService.deleteInventario(codigo);
         }

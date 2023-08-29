@@ -13,27 +13,27 @@ public class Colaborador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigocolabordor;
+    private int codigocolaborador;
 
     private String nombre;
 
     private String identificacion;
 
 
-    @OneToOne
-    @JoinColumn(name = "FK_tipoidentificacion")
+    @ManyToOne
+    @JoinColumn(name = "codigotipoidentificacion")
     private TipoIdentificacion codigotipoidentificacion;
 
-    @OneToOne
-    @JoinColumn(name = "FK_estadocolaborador")
+    @ManyToOne
+    @JoinColumn(name = "codigoestadocolaborador")
     private EstadoColaborador codigoestadocolaborador;
 
-    @OneToOne
-    @JoinColumn(name = "FK_tipocolaborador")
+    @ManyToOne
+    @JoinColumn(name = "codigotipocolaborador")
     private TipoColaborador codigotipocolaborador;
 
-    @OneToOne
-    @JoinColumn(name = "FK_sede")
+    @ManyToOne
+    @JoinColumn(name = "codigosede")
     private Sede codigosede;
 
 

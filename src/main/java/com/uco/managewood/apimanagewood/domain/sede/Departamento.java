@@ -16,7 +16,7 @@ public class Departamento {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "FK_pais")
+    @JoinColumn(name = "codigopais")
     private Pais codigopais;
 
 }
