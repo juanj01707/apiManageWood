@@ -3,17 +3,19 @@ package com.uco.managewood.apimanagewood.domain.sede;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Ciudad {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigociudad", nullable = false)
     private int codigociudad;
+
+
+    @Column(name = "nombre")
     private String nombre;
 
     @ManyToOne
