@@ -13,6 +13,8 @@ public class Inventario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigoinventario;
+
+    @Column(name = "nombre")
     private String nombre;
 
     @ManyToOne

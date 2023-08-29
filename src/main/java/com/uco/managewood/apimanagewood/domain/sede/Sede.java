@@ -10,8 +10,11 @@ import javax.persistence.*;
 public class Sede {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigosede",nullable = false)
     private int codigosede;
+
+    @Column(name = "nombre")
     private String nombre;
 
     @ManyToOne
