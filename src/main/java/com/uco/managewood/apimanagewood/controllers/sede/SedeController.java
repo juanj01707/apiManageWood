@@ -1,36 +1,37 @@
 package com.uco.managewood.apimanagewood.controllers.sede;
+import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
 import com.uco.managewood.apimanagewood.domain.sede.Ciudad;
 import com.uco.managewood.apimanagewood.domain.sede.Empresa;
 import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.service.sede.SedeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @RestController
 @RequestMapping("api/v1/rest")
 public class SedeController {
 
-    @Autowired
     private SedeService sedeService;
 
-    @GetMapping("/sedes")
-    public Sede get(@RequestParam(required = true) Integer codigoSede) {
-        return sedeService.get(codigoSede);
+    @GetMapping(value = "/sede/{codigo}")
+    public ResponseEntity<Optional<Sede>> findSedeById(@PathVariable("codigo") Integer codigo){
+        return ResponseEntity.status(HttpStatus.OK).body(sedeService.findById(codigo));
     }
 
-    @PostMapping("/sedes")
-    public String create(@RequestBody Sede sede){
-        return sedeService.create(sede);
+    @PostMapping(value = "/sede")
+    public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
+        return ResponseEntity.status(HttpStatus.CREATED).body(sedeService.saveSede(sede));
     }
 
-
-    @DeleteMapping("/sedes")
-    public String delete(@RequestParam(required = true) Integer codigoSede){
-        return sedeService.delete(codigoSede);
-
+    @DeleteMapping(value = "/sede/{codigo}")
+    public void deleteSede(@PathVariable("codigo") Integer codigo){
+        sedeService.deleteSede(codigo);
     }
-
 
 
 

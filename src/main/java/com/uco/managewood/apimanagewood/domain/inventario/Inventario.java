@@ -1,43 +1,24 @@
 package com.uco.managewood.apimanagewood.domain.inventario;
 
 import com.uco.managewood.apimanagewood.domain.sede.Sede;
+import lombok.Data;
 
+import javax.persistence.*;
 
-
-
+@Data
+@Entity
+@Table(name = "inventario")
 public class Inventario {
 
-private int codigo;
-private String nombre;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int codigoinventario;
+    private String nombre;
 
-private Sede sede;
+    @ManyToOne
+    @JoinColumn(name = "codigosede")
+    private Sede codigosede;
 
-    public Inventario(){
 
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Sede getSede() {
-        return sede;
-    }
-
-    public void setSede(Sede sede) {
-        this.sede = sede;
-    }
 }
 
