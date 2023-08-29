@@ -17,7 +17,7 @@ public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
 
-
+//hola
     @GetMapping(value = "/colaborador/{codigo}")
     public ResponseEntity<Optional<Colaborador>> findColaboradorById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.findById(codigo));
