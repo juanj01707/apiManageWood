@@ -18,4 +18,6 @@ public class TipoColaborador {
     private String funcion;
 
 
+
+
 }

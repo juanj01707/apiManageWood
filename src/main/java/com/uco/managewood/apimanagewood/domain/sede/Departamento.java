@@ -21,4 +21,27 @@ public class Departamento {
     @JoinColumn(name = "codigopais")
     private Pais codigopais;
 
+    public int getCodigodepartamento() {
+        return codigodepartamento;
+    }
+
+    public void setCodigodepartamento(int codigodepartamento) {
+        this.codigodepartamento = codigodepartamento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Pais getCodigopais() {
+        return codigopais;
+    }
+
+    public void setCodigopais(Pais codigopais) {
+        this.codigopais = codigopais;
+    }
 }

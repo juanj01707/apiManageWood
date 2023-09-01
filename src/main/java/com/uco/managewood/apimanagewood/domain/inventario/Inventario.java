@@ -22,5 +22,6 @@ public class Inventario {
     private Sede codigosede;
 
 
+
 }
 

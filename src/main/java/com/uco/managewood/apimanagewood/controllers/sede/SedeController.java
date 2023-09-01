@@ -22,8 +22,10 @@ public class SedeController {
     @GetMapping(value = "/sede")
     public ResponseEntity<List<Sede>> getAllSedes() {
         List<Sede> sedes = sedeService.findAll();
+       // sedes.forEach(sede -> System.out.println(sede.getNombre()));
         if (!sedes.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(sedes);
+
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

@@ -15,4 +15,20 @@ public class Pais {
     private int codigopais;
     @Column(name = "nombre")
     private String nombre;
+
+    public int getCodigopais() {
+        return codigopais;
+    }
+
+    public void setCodigopais(int codigopais) {
+        this.codigopais = codigopais;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

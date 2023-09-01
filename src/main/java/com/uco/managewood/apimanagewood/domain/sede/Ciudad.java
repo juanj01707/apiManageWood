@@ -23,6 +23,27 @@ public class Ciudad {
     @JoinColumn(name = "codigodepartamento")
     private Departamento codigodepartamento;
 
+    public int getCodigociudad() {
+        return codigociudad;
+    }
 
+    public void setCodigociudad(int codigociudad) {
+        this.codigociudad = codigociudad;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Departamento getCodigodepartamento() {
+        return codigodepartamento;
+    }
+
+    public void setCodigodepartamento(Departamento codigodepartamento) {
+        this.codigodepartamento = codigodepartamento;
+    }
 }

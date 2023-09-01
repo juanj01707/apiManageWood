@@ -20,4 +20,27 @@ public class Empresa {
     @Column(name = "nit",nullable = false)
     private String nit;
 
+    public int getCodigoempresa() {
+        return codigoempresa;
+    }
+
+    public void setCodigoempresa(int codigoempresa) {
+        this.codigoempresa = codigoempresa;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
 }

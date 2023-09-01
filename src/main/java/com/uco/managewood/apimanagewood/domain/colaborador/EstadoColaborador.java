@@ -15,6 +15,7 @@ public class EstadoColaborador {
     @Id
     private int codigoestadocolaborador;
 
+
     private String nombre;
 
 
