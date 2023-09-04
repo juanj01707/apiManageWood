@@ -2,12 +2,14 @@ package com.uco.managewood.apimanagewood.controllers.colaborador;
 
 
 import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
+import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.service.colaborador.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,7 +19,18 @@ public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
 
-//hola
+    @GetMapping(value = "/colaborador")
+    public ResponseEntity<List<Colaborador>> getAllColaboradores() {
+        List<Colaborador> colaboradores = colaboradorService.findAll();
+        if (!colaboradores.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(colaboradores);
+
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
     @GetMapping(value = "/colaborador/{codigo}")
     public ResponseEntity<Optional<Colaborador>> findColaboradorById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.findById(codigo));
