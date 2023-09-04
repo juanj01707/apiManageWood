@@ -12,6 +12,7 @@ public class Inventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigoinventario", nullable = false)
     private int codigoinventario;
 
     @Column(name = "nombre")
@@ -19,7 +20,6 @@ public class Inventario {
 
     @ManyToOne
     @JoinColumn(name = "codigosede")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Sede codigosede;
 
     public int getCodigoinventario() {

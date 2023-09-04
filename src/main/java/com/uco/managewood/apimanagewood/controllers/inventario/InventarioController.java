@@ -2,7 +2,6 @@
 
 
     import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
-    import com.uco.managewood.apimanagewood.domain.sede.Sede;
     import com.uco.managewood.apimanagewood.service.inventario.InventarioService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
@@ -42,6 +41,12 @@
         @DeleteMapping(value = "/inventario/{codigo}")
         public void deleteInventario(@PathVariable("codigo") Integer codigo){
             inventarioService.deleteInventario(codigo);
+        }
+
+        @PutMapping(value = "/inventario/{codigo}")
+        public ResponseEntity<Inventario> updateInventario(@PathVariable("codigo") Integer codigo, @RequestBody Inventario nuevoInventario) {
+            Inventario inventarioActualizado = inventarioService.updateInventario(codigo, nuevoInventario);
+            return ResponseEntity.status(HttpStatus.OK).body(inventarioActualizado);
         }
 
 

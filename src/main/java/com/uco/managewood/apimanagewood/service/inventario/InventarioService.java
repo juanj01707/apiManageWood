@@ -29,4 +29,18 @@ public class InventarioService {
         inventarioRepository.deleteById(codigo);
     }
 
+
+    public Inventario updateInventario(int codigoinventario, Inventario nuevoInventario) {
+        Optional<Inventario> inventarioOptional = inventarioRepository.findById(codigoinventario);
+
+        if (inventarioOptional.isPresent()) {
+            Inventario inventarioExistente = inventarioOptional.get();
+            inventarioExistente.setNombre(nuevoInventario.getNombre());
+            return inventarioRepository.save(inventarioExistente);
+        } else {
+            throw new RuntimeException("Inventario no encontrado con el código: " + codigoinventario);
+        }
+    }
+
+
 }
