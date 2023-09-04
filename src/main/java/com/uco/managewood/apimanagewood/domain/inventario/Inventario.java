@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Inventario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigoinventario;
 
     @Column(name = "nombre")
@@ -19,9 +19,31 @@ public class Inventario {
 
     @ManyToOne
     @JoinColumn(name = "codigosede")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Sede codigosede;
 
+    public int getCodigoinventario() {
+        return codigoinventario;
+    }
 
+    public void setCodigoinventario(int codigoinventario) {
+        this.codigoinventario = codigoinventario;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Sede getCodigosede() {
+        return codigosede;
+    }
+
+    public void setCodigosede(Sede codigosede) {
+        this.codigosede = codigosede;
+    }
 }
 

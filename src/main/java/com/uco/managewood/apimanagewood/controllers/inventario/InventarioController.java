@@ -2,12 +2,14 @@
 
 
     import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
+    import com.uco.managewood.apimanagewood.domain.sede.Sede;
     import com.uco.managewood.apimanagewood.service.inventario.InventarioService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
+    import java.util.List;
     import java.util.Optional;
 
     @RestController
@@ -16,6 +18,16 @@
         @Autowired
         private InventarioService inventarioService;
 
+
+        @GetMapping(value = "/inventario")
+        public ResponseEntity<List<Inventario>> getAllInventarios(){
+            List<Inventario> inventarios = inventarioService.findAll();
+            if (!inventarios.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(inventarios);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }
 
         @GetMapping(value = "/inventario/{codigo}")
         public ResponseEntity<Optional<Inventario>> findInventarioById(@PathVariable("codigo") Integer codigo){

@@ -18,11 +18,9 @@ public class SedeController {
     @Autowired
     private SedeService sedeService;
 
-    //FINDALL
     @GetMapping(value = "/sede")
     public ResponseEntity<List<Sede>> getAllSedes() {
         List<Sede> sedes = sedeService.findAll();
-       // sedes.forEach(sede -> System.out.println(sede.getNombre()));
         if (!sedes.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(sedes);
 
@@ -30,8 +28,6 @@ public class SedeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
-
 
     @GetMapping(value = "/sede/{codigo}")
     public ResponseEntity<Optional<Sede>> findSedeById(@PathVariable("codigo") Integer codigo){
@@ -48,6 +44,10 @@ public class SedeController {
         sedeService.deleteSede(codigo);
     }
 
-
+    @PutMapping(value = "/sede/{codigo}")
+    public ResponseEntity<Sede> updateSede(@PathVariable("codigo") Integer codigo, @RequestBody Sede nuevaSede) {
+        Sede sedeActualizada = sedeService.updateSede(codigo, nuevaSede);
+        return ResponseEntity.status(HttpStatus.OK).body(sedeActualizada);
+    }
 
 }
