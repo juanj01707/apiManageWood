@@ -36,14 +36,20 @@ public class ColaboradorController {
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.findById(codigo));
     }
 
-    @PostMapping
+    @PostMapping(value = "/colaborador")
     public ResponseEntity<Colaborador> saveColaborador(@RequestBody Colaborador colaborador){
         return ResponseEntity.status(HttpStatus.CREATED).body(colaboradorService.saveColaborador(colaborador));
     }
 
-    @DeleteMapping(value = "/{codigo}")
+    @DeleteMapping(value = "/colaborador/{codigo}")
     public void deleteColaborador(@PathVariable("codigo") Integer codigo){
         colaboradorService.deleteColaborador(codigo);
+    }
+
+    @PutMapping(value = "/colaborador/{codigo}")
+    public ResponseEntity<Colaborador> updateColaborador(@PathVariable("codigo") Integer codigo, @RequestBody Colaborador nuevoColaborador) {
+        Colaborador colaboradorActualizado = colaboradorService.updateColaborador(codigo, nuevoColaborador);
+        return ResponseEntity.status(HttpStatus.OK).body(colaboradorActualizado);
     }
 
 }
