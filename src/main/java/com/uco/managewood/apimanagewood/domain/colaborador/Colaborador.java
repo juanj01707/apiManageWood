@@ -39,6 +39,12 @@ public class Colaborador {
     @JoinColumn(name = "codigosede")
     private Sede codigosede;
 
+    @Column(name = "correo")
+    private String correo;
+
+    @Column(name = "password")
+    private String password;
+
     public int getCodigocolaborador() {
         return codigocolaborador;
     }
@@ -94,4 +100,22 @@ public class Colaborador {
     public void setCodigosede(Sede codigosede) {
         this.codigosede = codigosede;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
+
+
