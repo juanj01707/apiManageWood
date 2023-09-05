@@ -3,9 +3,7 @@ package com.uco.managewood.apimanagewood.domain.colaborador;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,8 +11,26 @@ import javax.persistence.Table;
 public class TipoIdentificacion {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigotipoidentificacion", nullable = false)
     private int codigotipoidentificacion;
+
+    @Column(name = "nombre")
     private String nombre;
 
+    public int getCodigotipoidentificacion() {
+        return codigotipoidentificacion;
+    }
 
+    public void setCodigotipoidentificacion(int codigotipoidentificacion) {
+        this.codigotipoidentificacion = codigotipoidentificacion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

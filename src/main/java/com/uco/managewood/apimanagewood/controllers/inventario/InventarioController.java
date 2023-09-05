@@ -8,6 +8,7 @@
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
+    import java.util.List;
     import java.util.Optional;
 
     @RestController
@@ -16,6 +17,16 @@
         @Autowired
         private InventarioService inventarioService;
 
+
+        @GetMapping(value = "/inventario")
+        public ResponseEntity<List<Inventario>> getAllInventarios(){
+            List<Inventario> inventarios = inventarioService.findAll();
+            if (!inventarios.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(inventarios);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }
 
         @GetMapping(value = "/inventario/{codigo}")
         public ResponseEntity<Optional<Inventario>> findInventarioById(@PathVariable("codigo") Integer codigo){
@@ -30,6 +41,12 @@
         @DeleteMapping(value = "/inventario/{codigo}")
         public void deleteInventario(@PathVariable("codigo") Integer codigo){
             inventarioService.deleteInventario(codigo);
+        }
+
+        @PutMapping(value = "/inventario/{codigo}")
+        public ResponseEntity<Inventario> updateInventario(@PathVariable("codigo") Integer codigo, @RequestBody Inventario nuevoInventario) {
+            Inventario inventarioActualizado = inventarioService.updateInventario(codigo, nuevoInventario);
+            return ResponseEntity.status(HttpStatus.OK).body(inventarioActualizado);
         }
 
 
