@@ -46,6 +46,8 @@ public class ColaboradorService {
             colaboradorExistente.setCodigoestadocolaborador(nuevoColaborador.getCodigoestadocolaborador());
             colaboradorExistente.setCodigotipocolaborador(nuevoColaborador.getCodigotipocolaborador());
             colaboradorExistente.setCodigosede(nuevoColaborador.getCodigosede());
+            colaboradorExistente.setCorreo(nuevoColaborador.getCorreo());
+            colaboradorExistente.setPassword(nuevoColaborador.getPassword());
 
             return colaboradorRepository.save(colaboradorExistente);
         } else {
