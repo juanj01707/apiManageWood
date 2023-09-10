@@ -1,5 +1,4 @@
 package com.uco.managewood.apimanagewood.util;
-import java.util.List;
 
 
 public final class UtilStrings {
