@@ -1,7 +1,6 @@
 package com.uco.managewood.apimanagewood.controllers.colaborador;
 
 import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
-import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.service.colaborador.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
