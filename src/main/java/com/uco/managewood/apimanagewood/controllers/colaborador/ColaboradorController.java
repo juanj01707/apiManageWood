@@ -1,9 +1,5 @@
 package com.uco.managewood.apimanagewood.controllers.colaborador;
-//RAMASS
-//RAMASS
-
-//CHICHARON
-//POLLO
+//MIGUE
 import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
 import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.service.colaborador.ColaboradorService;
