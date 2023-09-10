@@ -2,6 +2,7 @@
 
 
     import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
+    import com.uco.managewood.apimanagewood.domain.sede.Sede;
     import com.uco.managewood.apimanagewood.service.inventario.InventarioService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@
     import org.springframework.web.bind.annotation.*;
 
     import java.util.List;
+    import java.util.Map;
     import java.util.Optional;
 
     @RestController
@@ -49,6 +51,10 @@
             return ResponseEntity.status(HttpStatus.OK).body(inventarioActualizado);
         }
 
+        @PatchMapping(value = "/inventario/{codigo}")
+        public Inventario patchInventario(@PathVariable("codigo") Integer codigo, @RequestBody Map<String, Object> fields){
+            return inventarioService.patchInventario(codigo,fields);
+        }
 
 
 

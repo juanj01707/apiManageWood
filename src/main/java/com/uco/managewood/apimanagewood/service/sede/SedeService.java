@@ -5,8 +5,11 @@ import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.repository.sede.SedeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -51,4 +54,24 @@ public class SedeService{
         }
     }
 
+
+    public Sede patchSede(int codigosede, Map<String, Object> fields){
+
+        Optional<Sede> sedeOptional = sedeRepository.findById(codigosede);
+
+        if(sedeOptional.isPresent()) {
+            Sede sedeExistente = sedeOptional.get();
+            fields.forEach((key, value) -> {
+                Field field = ReflectionUtils.findField(Sede.class, key);
+                field.setAccessible(true);
+
+                if (field.getType() == String.class && value instanceof String) {
+                    ReflectionUtils.setField(field, sedeExistente, value);
+                }
+
+            });
+            return sedeRepository.save(sedeExistente);
+        }
+        return null;
+    }
 }

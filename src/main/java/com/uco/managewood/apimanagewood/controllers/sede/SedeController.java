@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -49,5 +50,12 @@ public class SedeController {
         Sede sedeActualizada = sedeService.updateSede(codigo, nuevaSede);
         return ResponseEntity.status(HttpStatus.OK).body(sedeActualizada);
     }
+
+
+    @PatchMapping(value = "/sede/{codigo}")
+    public Sede patchSede(@PathVariable("codigo") Integer codigo,@RequestBody Map<String, Object> fields){
+        return sedeService.patchSede(codigo,fields);
+    }
+
 
 }

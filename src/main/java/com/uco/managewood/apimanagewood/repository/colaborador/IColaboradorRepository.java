@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IColaboradorRepository extends JpaRepository<Colaborador, Integer> {
 
+    Colaborador findByCorreo(String correo);
+
+
 }

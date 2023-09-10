@@ -2,12 +2,15 @@ package com.uco.managewood.apimanagewood.service.colaborador;
 
 
 import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
-import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
+import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.repository.colaborador.IColaboradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -46,6 +49,8 @@ public class ColaboradorService {
             colaboradorExistente.setCodigoestadocolaborador(nuevoColaborador.getCodigoestadocolaborador());
             colaboradorExistente.setCodigotipocolaborador(nuevoColaborador.getCodigotipocolaborador());
             colaboradorExistente.setCodigosede(nuevoColaborador.getCodigosede());
+            colaboradorExistente.setCorreo(nuevoColaborador.getCorreo());
+            colaboradorExistente.setPassword(nuevoColaborador.getPassword());
 
             return colaboradorRepository.save(colaboradorExistente);
         } else {
@@ -53,6 +58,27 @@ public class ColaboradorService {
             throw new RuntimeException("Colaborador no encontrada con el código: " + codigocolaborador);
         }
     }
+
+    public Colaborador patchColaborador(int codigocolaborador, Map<String, Object> fields){
+
+        Optional<Colaborador> colaboradorOptional = colaboradorRepository.findById(codigocolaborador);
+
+        if(colaboradorOptional.isPresent()) {
+            Colaborador colaboradorExistente = colaboradorOptional.get();
+            fields.forEach((key, value) -> {
+                Field field = ReflectionUtils.findField(Colaborador.class, key);
+                field.setAccessible(true);
+
+                if (field.getType() == String.class && value instanceof String) {
+                    ReflectionUtils.setField(field, colaboradorExistente, value);
+                }
+
+            });
+            return colaboradorRepository.save(colaboradorExistente);
+        }
+        return null;
+    }
+
     
 
 }
