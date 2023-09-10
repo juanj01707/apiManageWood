@@ -59,8 +59,6 @@ public class SedeService{
 
         Optional<Sede> sedeOptional = sedeRepository.findById(codigosede);
 
-
-
         if(sedeOptional.isPresent()) {
             Sede sedeExistente = sedeOptional.get();
             fields.forEach((key, value) -> {
@@ -70,17 +68,10 @@ public class SedeService{
                 if (field.getType() == String.class && value instanceof String) {
                     ReflectionUtils.setField(field, sedeExistente, value);
                 }
-                //ReflectionUtils.setField(field, sedeExistente, value);
+
             });
             return sedeRepository.save(sedeExistente);
         }
         return null;
-
     }
-
-
-
-
-
-
 }
