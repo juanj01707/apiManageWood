@@ -32,11 +32,21 @@ public class InventarioService {
 
 
     public Inventario saveInventario(Inventario inventario) {
+
+        Inventario existingInventario = inventarioRepository.findByNombre(inventario.getNombre());
+
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(inventario, "inventario");
         inventarioValidator.validate(inventario, bindingResult);
         if (bindingResult.hasErrors()) {
             return null;
         }
+
+
+
+        if (existingInventario != null) {
+            throw new RuntimeException("Ya existe un inventario con el mismo nombre: " + inventario.getNombre());
+        }
+
         return inventarioRepository.save(inventario);
     }
 
