@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
 
-import javax.validation.ValidationException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.Errors;
 
 @Service
 public class SedeService{
@@ -43,9 +39,7 @@ public class SedeService{
         sedeValidator.validate(sede, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            // Aquí, en lugar de lanzar una excepción, puedes simplemente devolver null o lanzar una excepción personalizada,
-            // dependiendo de cómo quieras manejar los errores.
-            return null; // O lanzar una excepción personalizada si lo prefieres.
+            return null;
         }
 
         return sedeRepository.save(sede);
@@ -56,14 +50,6 @@ public class SedeService{
         return sedeRepository.save(sede);
     }
     */
-
-
-
-
-
-
-
-
 
     public void deleteSede(Integer codigo){
         sedeRepository.deleteById(codigo);

@@ -35,10 +35,23 @@
             return ResponseEntity.status(HttpStatus.OK).body(inventarioService.findById(codigo));
         }
 
+
+        @PostMapping(value = "/inventarios")
+        public ResponseEntity<Inventario> saveInventario(@RequestBody Inventario inventario){
+            Inventario savedInventario = inventarioService.saveInventario(inventario);
+            if (savedInventario != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(savedInventario);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        }
+
+        /*
         @PostMapping(value = "/inventarios")
         public ResponseEntity<Inventario> saveInventario(@RequestBody Inventario inventario){
             return ResponseEntity.status(HttpStatus.CREATED).body(inventarioService.saveInventario(inventario));
         }
+        */
 
         @DeleteMapping(value = "/inventarios/{codigo}")
         public void deleteInventario(@PathVariable("codigo") Integer codigo){

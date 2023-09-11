@@ -25,6 +25,7 @@ public class Sede {
     @Column(name = "nombre")
     private String nombre;
 
+
     @ManyToOne
     @JoinColumn(name = "codigoempresa")
     private Empresa codigoempresa;
