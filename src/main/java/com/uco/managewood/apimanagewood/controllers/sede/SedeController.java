@@ -37,8 +37,21 @@ public class SedeController {
 
     @PostMapping(value = "/sedes")
     public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
+        Sede savedSede = sedeService.saveSede(sede);
+
+        if (savedSede != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedSede);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    /*
+    @PostMapping(value = "/sedes")
+    public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
         return ResponseEntity.status(HttpStatus.CREATED).body(sedeService.saveSede(sede));
     }
+    */
 
     @DeleteMapping(value = "/sedes/{codigo}")
     public void deleteSede(@PathVariable("codigo") Integer codigo){

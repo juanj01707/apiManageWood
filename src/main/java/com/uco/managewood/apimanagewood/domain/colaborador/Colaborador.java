@@ -5,6 +5,8 @@ import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -16,6 +18,8 @@ public class Colaborador {
     @Column(name = "codigocolaborador",nullable = false)
     private int codigocolaborador;
 
+    @NotBlank
+    @NotNull
     @Column(name = "nombre")
     private String nombre;
 
