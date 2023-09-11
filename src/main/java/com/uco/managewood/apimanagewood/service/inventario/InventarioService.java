@@ -41,8 +41,6 @@ public class InventarioService {
             return null;
         }
 
-
-
         if (existingInventario != null) {
             throw new RuntimeException("Ya existe un inventario con el mismo nombre: " + inventario.getNombre());
         }

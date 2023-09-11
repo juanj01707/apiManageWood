@@ -35,11 +35,18 @@ public class SedeService{
 
 
     public Sede saveSede(Sede sede) {
+
+        Sede exinstingSede = sedeRepository.findByNombre(sede.getNombre());
+
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(sede, "sede");
         sedeValidator.validate(sede, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return null;
+        }
+
+        if (exinstingSede != null) {
+            throw new RuntimeException("Ya existe una sede con el mismo nombre: " + sede.getNombre());
         }
 
         return sedeRepository.save(sede);
