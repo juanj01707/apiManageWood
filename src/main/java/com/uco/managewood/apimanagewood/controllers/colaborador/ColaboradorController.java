@@ -18,7 +18,7 @@ public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
 
-    @GetMapping(value = "/colaborador")
+    @GetMapping(value = "/colaboradores")
     public ResponseEntity<List<Colaborador>> getAllColaboradores() {
         List<Colaborador> colaboradores = colaboradorService.findAll();
         if (!colaboradores.isEmpty()) {
@@ -30,28 +30,28 @@ public class ColaboradorController {
     }
 
 
-    @GetMapping(value = "/colaborador/{codigo}")
+    @GetMapping(value = "/colaboradores/{codigo}")
     public ResponseEntity<Optional<Colaborador>> findColaboradorById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.findById(codigo));
     }
 
-    @PostMapping(value = "/colaborador")
+    @PostMapping(value = "/colaboradores")
     public ResponseEntity<Colaborador> saveColaborador(@RequestBody Colaborador colaborador){
         return ResponseEntity.status(HttpStatus.CREATED).body(colaboradorService.saveColaborador(colaborador));
     }
 
-    @DeleteMapping(value = "/colaborador/{codigo}")
+    @DeleteMapping(value = "/colaboradores/{codigo}")
     public void deleteColaborador(@PathVariable("codigo") Integer codigo){
         colaboradorService.deleteColaborador(codigo);
     }
 
-    @PutMapping(value = "/colaborador/{codigo}")
+    @PutMapping(value = "/colaboradores/{codigo}")
     public ResponseEntity<Colaborador> updateColaborador(@PathVariable("codigo") Integer codigo, @RequestBody Colaborador nuevoColaborador) {
         Colaborador colaboradorActualizado = colaboradorService.updateColaborador(codigo, nuevoColaborador);
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorActualizado);
     }
 
-    @PatchMapping(value = "/colaborador/{codigo}")
+    @PatchMapping(value = "/colaboradores/{codigo}")
     public Colaborador patchColaborador(@PathVariable("codigo") Integer codigo,@RequestBody Map<String, Object> fields){
         return colaboradorService.patchColaborador(codigo,fields);
     }

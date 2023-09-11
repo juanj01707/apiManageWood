@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InventarioRepository extends JpaRepository<Inventario, Integer> {
+    Inventario findByNombre(String nombre);
 
 }

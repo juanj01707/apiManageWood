@@ -3,14 +3,17 @@ package com.uco.managewood.apimanagewood.service.sede;
 
 import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.repository.sede.SedeRepository;
+import com.uco.managewood.apimanagewood.validators.SedeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.validation.BeanPropertyBindingResult;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 
 @Service
 public class SedeService{
@@ -19,7 +22,9 @@ public class SedeService{
     @Autowired
     private SedeRepository sedeRepository;
 
-    //FINDALL
+    @Autowired
+    private SedeValidator sedeValidator;
+
     public List<Sede> findAll() {
         return sedeRepository.findAll();
     }
@@ -28,9 +33,30 @@ public class SedeService{
         return sedeRepository.findById(codigo);
     }
 
+
+    public Sede saveSede(Sede sede) {
+
+        Sede exinstingSede = sedeRepository.findByNombre(sede.getNombre());
+
+        BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(sede, "sede");
+        sedeValidator.validate(sede, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return null;
+        }
+
+        if (exinstingSede != null) {
+            throw new RuntimeException("Ya existe una sede con el mismo nombre: " + sede.getNombre());
+        }
+
+        return sedeRepository.save(sede);
+    }
+
+    /*
     public Sede saveSede(Sede sede){
         return sedeRepository.save(sede);
     }
+    */
 
     public void deleteSede(Integer codigo){
         sedeRepository.deleteById(codigo);
@@ -43,13 +69,11 @@ public class SedeService{
 
         if (sedeOptional.isPresent()) {
             Sede sedeExistente = sedeOptional.get();
-            // Actualizar los campos necesarios de la sede existente con los valores de nuevaSede
             sedeExistente.setNombre(nuevaSede.getNombre());
             sedeExistente.setCodigoempresa(nuevaSede.getCodigoempresa());
             sedeExistente.setCodigociudad(nuevaSede.getCodigociudad());
             return sedeRepository.save(sedeExistente);
         } else {
-            // Manejar el caso en que la sede no se encuentra
             throw new RuntimeException("Sede no encontrada con el código: " + codigosede);
         }
     }

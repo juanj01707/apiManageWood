@@ -2,12 +2,15 @@ package com.uco.managewood.apimanagewood.service.colaborador;
 
 
 import com.uco.managewood.apimanagewood.domain.colaborador.Colaborador;
-import com.uco.managewood.apimanagewood.domain.sede.Sede;
 import com.uco.managewood.apimanagewood.repository.colaborador.IColaboradorRepository;
+import com.uco.managewood.apimanagewood.validators.ColaboradorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.validation.BeanPropertyBindingResult;
 
+
+import javax.validation.ValidationException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,9 @@ public class ColaboradorService {
     @Autowired
     private IColaboradorRepository colaboradorRepository;
 
+    @Autowired
+    private ColaboradorValidator colaboradorValidator;
+
     public List<Colaborador> findAll() {
         return colaboradorRepository.findAll();
     }
@@ -29,9 +35,36 @@ public class ColaboradorService {
     }
 
 
+    public Colaborador saveColaborador(Colaborador colaborador) {
+        // Llama al validador personalizado
+        colaboradorValidator.validate(colaborador, new BeanPropertyBindingResult(colaborador, "colaborador"));
+
+        // Verifica si hay errores de validación
+        if (colaboradorValidator.hasErrors()) {
+            // Maneja los errores de validación aquí, por ejemplo, lanza una excepción o devuelve una respuesta personalizada
+            // Ejemplo de lanzar una excepción:
+            throw new ValidationException("Error de validación al guardar el colaborador");
+        }
+
+        // Si no hay errores de validación, guarda el colaborador en la base de datos
+        return colaboradorRepository.save(colaborador);
+    }
+
+
+    /*
     public Colaborador saveColaborador(Colaborador colaborador){
         return colaboradorRepository.save(colaborador);
     }
+    */
+
+
+
+
+
+
+
+
+
 
     public void deleteColaborador(Integer codigo){
         colaboradorRepository.deleteById(codigo);
