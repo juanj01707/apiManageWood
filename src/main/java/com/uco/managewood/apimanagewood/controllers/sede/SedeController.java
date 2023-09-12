@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -18,7 +19,7 @@ public class SedeController {
     @Autowired
     private SedeService sedeService;
 
-    @GetMapping(value = "/sede")
+    @GetMapping(value = "/sedes")
     public ResponseEntity<List<Sede>> getAllSedes() {
         List<Sede> sedes = sedeService.findAll();
         if (!sedes.isEmpty()) {
@@ -29,25 +30,45 @@ public class SedeController {
         }
     }
 
-    @GetMapping(value = "/sede/{codigo}")
+    @GetMapping(value = "/sedes/{codigo}")
     public ResponseEntity<Optional<Sede>> findSedeById(@PathVariable("codigo") Integer codigo){
         return ResponseEntity.status(HttpStatus.OK).body(sedeService.findById(codigo));
     }
 
-    @PostMapping(value = "/sede")
+    @PostMapping(value = "/sedes")
+    public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
+        Sede savedSede = sedeService.saveSede(sede);
+
+        if (savedSede != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedSede);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    /*
+    @PostMapping(value = "/sedes")
     public ResponseEntity<Sede> saveSede(@RequestBody Sede sede){
         return ResponseEntity.status(HttpStatus.CREATED).body(sedeService.saveSede(sede));
     }
+    */
 
-    @DeleteMapping(value = "/sede/{codigo}")
+    @DeleteMapping(value = "/sedes/{codigo}")
     public void deleteSede(@PathVariable("codigo") Integer codigo){
         sedeService.deleteSede(codigo);
     }
 
-    @PutMapping(value = "/sede/{codigo}")
+    @PutMapping(value = "/sedes/{codigo}")
     public ResponseEntity<Sede> updateSede(@PathVariable("codigo") Integer codigo, @RequestBody Sede nuevaSede) {
         Sede sedeActualizada = sedeService.updateSede(codigo, nuevaSede);
         return ResponseEntity.status(HttpStatus.OK).body(sedeActualizada);
     }
+
+
+    @PatchMapping(value = "/sedes/{codigo}")
+    public Sede patchSede(@PathVariable("codigo") Integer codigo,@RequestBody Map<String, Object> fields){
+        return sedeService.patchSede(codigo,fields);
+    }
+
 
 }

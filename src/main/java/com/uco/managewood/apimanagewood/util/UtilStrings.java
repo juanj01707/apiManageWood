@@ -1,6 +1,4 @@
 package com.uco.managewood.apimanagewood.util;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public final class UtilStrings {
@@ -29,14 +27,6 @@ public final class UtilStrings {
         }
 
     }
-    public  static String arrayToStringSql(List<String> listaParametros){
-
-        String parametros = "";
-        listaParametros.forEach(parametro -> {
-            parametros.concat(parametro + ",");
-        });
-        System.out.println(parametros);
-        return  parametros;
-    }
+    
 
 }
