@@ -21,10 +21,9 @@ public class MessageSenderBroker implements MessageSender<Inventario> {
     private final ClientQueueConfig clientQueueConfig;
 
     @Override
-    public void execute(Inventario message, String idMessage) {
-        MessageProperties propiedadesMensaje = generarPropiedadesMensaje(idMessage);
+    public void execute(Inventario message) {
 
-        Optional<Message> cuerpoMensaje = obtenerCuerpoMensaje(message, propiedadesMensaje);
+        Optional<Message> cuerpoMensaje = obtenerCuerpoMensaje(message);
         if (!cuerpoMensaje.isPresent()) {
             return;
 
@@ -45,12 +44,11 @@ public class MessageSenderBroker implements MessageSender<Inventario> {
                 .build();
     }
 
-    private Optional<Message> obtenerCuerpoMensaje(Object mensaje, MessageProperties propiedadesMensaje) {
+    private Optional<Message> obtenerCuerpoMensaje(Object mensaje) {
         Optional<String> textoMensaje = mapperJsonObjeto.ejecutarGson(mensaje);
 
         return textoMensaje.map(msg -> MessageBuilder
                 .withBody(msg.getBytes())
-                .andProperties(propiedadesMensaje)
                 .build());
 
     }
