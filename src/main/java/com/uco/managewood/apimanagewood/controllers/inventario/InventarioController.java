@@ -36,6 +36,8 @@
         }
 
 
+        //aqui hay que hacer otro postmapping para save inventario dto si no estoy mal
+
         @PostMapping(value = "/inventarios")
         public ResponseEntity<Inventario> saveInventario(@RequestBody Inventario inventario){
             Inventario savedInventario = inventarioService.saveInventario(inventario);

@@ -3,6 +3,7 @@ package com.uco.managewood.apimanagewood.mensajeria.inventario;
 
 import com.uco.managewood.apimanagewood.config.ClientQueueConfig;
 import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
+import com.uco.managewood.apimanagewood.domain.inventario.InventarioRabbit;
 import com.uco.managewood.apimanagewood.util.MessageSender;
 import com.uco.managewood.apimanagewood.util.gson.MapperJsonObjeto;
 import org.springframework.amqp.core.Message;
@@ -15,16 +16,15 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class MessageSenderBroker implements MessageSender<Inventario> {
+public class MessageSenderBroker implements MessageSender<InventarioRabbit> {
     private final RabbitTemplate rabbitTemplate;
     private final MapperJsonObjeto mapperJsonObjeto;
     private final ClientQueueConfig clientQueueConfig;
 
     @Override
-    public void execute(Inventario message, String idMessage) {
-        MessageProperties propiedadesMensaje = generarPropiedadesMensaje(idMessage);
+    public void execute(InventarioRabbit message) {
 
-        Optional<Message> cuerpoMensaje = obtenerCuerpoMensaje(message, propiedadesMensaje);
+        Optional<Message> cuerpoMensaje = obtenerCuerpoMensaje(message);
         if (!cuerpoMensaje.isPresent()) {
             return;
 
@@ -45,12 +45,11 @@ public class MessageSenderBroker implements MessageSender<Inventario> {
                 .build();
     }
 
-    private Optional<Message> obtenerCuerpoMensaje(Object mensaje, MessageProperties propiedadesMensaje) {
+    private Optional<Message> obtenerCuerpoMensaje(Object mensaje) {
         Optional<String> textoMensaje = mapperJsonObjeto.ejecutarGson(mensaje);
 
         return textoMensaje.map(msg -> MessageBuilder
                 .withBody(msg.getBytes())
-                .andProperties(propiedadesMensaje)
                 .build());
 
     }

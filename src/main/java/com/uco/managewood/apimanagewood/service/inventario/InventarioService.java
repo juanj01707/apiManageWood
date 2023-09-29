@@ -2,7 +2,11 @@ package com.uco.managewood.apimanagewood.service.inventario;
 
 import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
 import com.uco.managewood.apimanagewood.domain.inventario.Inventario;
+import com.uco.managewood.apimanagewood.domain.inventario.InventarioRabbit;
+import com.uco.managewood.apimanagewood.mensajeria.inventario.MessageSenderBroker;
 import com.uco.managewood.apimanagewood.repository.inventario.InventarioRepository;
+
+import com.uco.managewood.apimanagewood.util.MessageSender;
 import com.uco.managewood.apimanagewood.validators.InventarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +22,18 @@ import java.util.Optional;
 @Service
 public class InventarioService {
 
+    private final MessageSender<InventarioRabbit> messageSenderInventario;
+
+    public InventarioService(MessageSender<InventarioRabbit> messageSenderInventario) {
+        this.messageSenderInventario = messageSenderInventario;
+    }
+
     @Autowired
     private InventarioRepository inventarioRepository;
 
     @Autowired
     private InventarioValidator inventarioValidator;
+
 
     public List<Inventario> findAll(){return inventarioRepository.findAll();}
 
@@ -35,8 +46,12 @@ public class InventarioService {
 
         Inventario existingInventario = inventarioRepository.findByNombre(inventario.getNombre());
 
+
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(inventario, "inventario");
         inventarioValidator.validate(inventario, bindingResult);
+        InventarioRabbit inventarioRabbit = new InventarioRabbit(inventario.getCodigoinventario(),inventario.getNombre(),inventario.getCodigosede().getCodigosede());
+
+
         if (bindingResult.hasErrors()) {
             return null;
         }
@@ -44,6 +59,16 @@ public class InventarioService {
         if (existingInventario != null) {
             throw new RuntimeException("Ya existe un inventario con el mismo nombre: " + inventario.getNombre());
         }
+
+        /*
+        if(sedeRepository.findByCodigo(inventario.getCodigosede().getCodigosede()) ==null){
+            throw new RuntimeException("No existe una sede con el codigo: " + inventario.getCodigosede().getCodigosede());
+        }
+        */
+
+
+
+        messageSenderInventario.execute(inventarioRabbit);
 
         return inventarioRepository.save(inventario);
     }
