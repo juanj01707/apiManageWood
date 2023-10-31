@@ -1,6 +1,5 @@
 package com.uco.managewood.apimanagewood.config;
 
-
 import com.uco.managewood.apimanagewood.jwt.JwtAuthenticationEntryPoint;
 import com.uco.managewood.apimanagewood.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
