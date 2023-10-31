@@ -13,10 +13,12 @@ import java.util.Optional;
 //HOLA
 @RestController
 @RequestMapping("api/v1/rest")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ColaboradorController {
 
     @Autowired
     private ColaboradorService colaboradorService;
+
 
     @GetMapping(value = "/colaboradores")
     public ResponseEntity<List<Colaborador>> getAllColaboradores() {

@@ -10,4 +10,5 @@ public class ApimanagewoodApplication {
 		SpringApplication.run(ApimanagewoodApplication.class, args);
 	}
 
+
 }
